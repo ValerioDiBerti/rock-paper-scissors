@@ -1,3 +1,4 @@
+// returns the computer's choice (rock/paper/scissors)
 function getComputerChoice() {
     // generate integer between 0 and 2 and store it a variable
     const choice = Math.floor(Math.random() * 3);
@@ -18,4 +19,29 @@ function getComputerChoice() {
     }
 }
 
-console.log(getComputerChoice())
+// returns the result of one round
+function playRound(playerSelection, computerSelection) {
+
+    if (playerSelection === computerSelection) {
+        return `It's a tie! You both chose ${playerSelection}`
+    } 
+    
+    else if (playerSelection === 'paper' && computerSelection === 'rock' 
+    || playerSelection === 'rock' && computerSelection === 'scissors' 
+    || playerSelection === 'scissors' && computerSelection === 'paper') {
+        return `You win! ${playerSelection} beats ${computerSelection}`
+    } 
+    
+    else { 
+        return `You lose! ${computerSelection} beats ${playerSelection}`
+    }
+
+}
+
+const playerSelection = 'paper';
+const computerSelection = getComputerChoice(); 
+
+console.log(playerSelection);
+console.log(computerSelection);
+
+console.log(playRound(playerSelection, computerSelection));
