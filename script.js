@@ -1,3 +1,19 @@
+function getPlayerChoice() {
+    let repeat;
+    let playerChoice;
+    do {
+        playerChoice = prompt('Choose rock/paper/scissors').toLowerCase();
+        if (playerChoice !== 'rock' && playerChoice !== 'paper' && playerChoice !== 'scissors') {
+            alert('Choose between rock paper and scissors');
+            repeat = true;
+        } else {
+            repeat = false;
+        }
+    } while (repeat === true);
+
+    return playerChoice;
+}
+
 // returns the computer's choice (rock/paper/scissors)
 function getComputerChoice() {
     // generate integer between 0 and 2 and store it a variable
@@ -38,7 +54,7 @@ function playRound(playerSelection, computerSelection) {
 
 }
 
-const playerSelection = 'paper';
+const playerSelection = getPlayerChoice();
 const computerSelection = getComputerChoice(); 
 
 console.log(playerSelection);
