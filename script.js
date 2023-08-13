@@ -1,3 +1,10 @@
+let playerScore = 0;
+let computerScore = 0;
+
+game();
+
+
+
 function getPlayerChoice() {
     let repeat;
     let playerChoice;
@@ -45,19 +52,40 @@ function playRound(playerSelection, computerSelection) {
     else if (playerSelection === 'paper' && computerSelection === 'rock' 
     || playerSelection === 'rock' && computerSelection === 'scissors' 
     || playerSelection === 'scissors' && computerSelection === 'paper') {
+        playerScore++;
         return `You win! ${playerSelection} beats ${computerSelection}`
     } 
     
     else { 
+        computerScore++;
         return `You lose! ${computerSelection} beats ${playerSelection}`
     }
 
 }
 
-const playerSelection = getPlayerChoice();
-const computerSelection = getComputerChoice(); 
+function game() {
+    const ROUNDS = 5;
 
-console.log(playerSelection);
-console.log(computerSelection);
+    
+    let playerSelection;
+    let computerSelection;
 
-console.log(playRound(playerSelection, computerSelection));
+    for (i=0; i<ROUNDS; i++) {
+        playerSelection = getPlayerChoice();
+        computerSelection = getComputerChoice();  
+        console.log(playRound(playerSelection, computerSelection));
+    } 
+
+    switch (true) {
+        case playerScore > computerScore :
+            console.log(`Player won! The score is ${playerScore}-${computerScore}`);
+            break;
+        case computerScore > playerScore :
+            console.log(`Computer won! The score is ${computerScore}-${playerScore}`);
+            break;
+        case playerScore === computerScore :
+            console.log('It\'s a tie');
+            break;
+    }
+}
+
