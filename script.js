@@ -3,8 +3,6 @@ let computerScore = 0;
 
 game();
 
-
-
 function getPlayerChoice() {
     let repeat;
     let playerChoice;
@@ -27,17 +25,17 @@ function getComputerChoice() {
     const choice = Math.floor(Math.random() * 3);
     // IF (random number = 0)
     if (choice === 0) {
-    //      THEN return rock
+        // THEN return rock
         return "rock";
     }
     // IF (random number = 1)
     if (choice === 1) {
-    //      THEN return paper
+        // THEN return paper
         return "paper";
     }
     // IF (random number = 2)
     if (choice === 2) {
-    //      THEN return scissors
+        // THEN return scissors
         return "scissors";
     }
 }
@@ -47,16 +45,16 @@ function playRound(playerSelection, computerSelection) {
 
     if (playerSelection === computerSelection) {
         return `It's a tie! You both chose ${playerSelection}`
-    } 
-    
-    else if (playerSelection === 'paper' && computerSelection === 'rock' 
-    || playerSelection === 'rock' && computerSelection === 'scissors' 
-    || playerSelection === 'scissors' && computerSelection === 'paper') {
+    }
+
+    else if (playerSelection === 'paper' && computerSelection === 'rock'
+        || playerSelection === 'rock' && computerSelection === 'scissors'
+        || playerSelection === 'scissors' && computerSelection === 'paper') {
         playerScore++;
         return `You win! ${playerSelection} beats ${computerSelection}`
-    } 
-    
-    else { 
+    }
+
+    else {
         computerScore++;
         return `You lose! ${computerSelection} beats ${playerSelection}`
     }
@@ -66,24 +64,23 @@ function playRound(playerSelection, computerSelection) {
 function game() {
     const ROUNDS = 5;
 
-    
     let playerSelection;
     let computerSelection;
 
-    for (i=0; i<ROUNDS; i++) {
+    for (i = 0; i < ROUNDS; i++) {
         playerSelection = getPlayerChoice();
-        computerSelection = getComputerChoice();  
+        computerSelection = getComputerChoice();
         console.log(playRound(playerSelection, computerSelection));
-    } 
+    }
 
     switch (true) {
-        case playerScore > computerScore :
+        case playerScore > computerScore:
             console.log(`Player won! The score is ${playerScore}-${computerScore}`);
             break;
-        case computerScore > playerScore :
+        case computerScore > playerScore:
             console.log(`Computer won! The score is ${computerScore}-${playerScore}`);
             break;
-        case playerScore === computerScore :
+        case playerScore === computerScore:
             console.log('It\'s a tie');
             break;
     }
