@@ -1,7 +1,18 @@
 let playerScore = 0;
 let computerScore = 0;
 
-game();
+// game();
+
+
+const buttons = document.querySelectorAll('button');
+const result = document.querySelector('#result');
+
+buttons.forEach(button => {
+    button.addEventListener('click',() => {
+        result.innerText = (playRound(button.id, getComputerChoice()))
+    })
+});
+
 
 function getPlayerChoice() {
     let repeat;
@@ -43,21 +54,39 @@ function getComputerChoice() {
 // returns the result of one round
 function playRound(playerSelection, computerSelection) {
 
+    let roundResult = ''; 
+    let winner = ''
+
     if (playerSelection === computerSelection) {
-        return `It's a tie! You both chose ${playerSelection}`
+        roundResult = `It's a tie! You both chose ${playerSelection}\n`
     }
 
     else if (playerSelection === 'paper' && computerSelection === 'rock'
         || playerSelection === 'rock' && computerSelection === 'scissors'
         || playerSelection === 'scissors' && computerSelection === 'paper') {
         playerScore++;
-        return `You win! ${playerSelection} beats ${computerSelection}`
+        roundResult = `You win! ${playerSelection} beats ${computerSelection}\n`
     }
 
     else {
         computerScore++;
-        return `You lose! ${computerSelection} beats ${playerSelection}`
+        roundResult = `You lose! ${computerSelection} beats ${playerSelection}\n`
     }
+
+    if (playerScore > computerScore) {
+        winner = 'player';
+    } else {
+        winner = 'computer';
+    }
+
+    roundResult += `The score is: Player - Computer: ${playerScore} - ${computerScore}\n`
+
+    if (playerScore === 5 || computerScore === 5) {
+        roundResult += `GAME OVER. The winner is ${winner}`;
+        playerScore = 0;
+        computerScore = 0;
+    } 
+    return roundResult;
 
 }
 
@@ -70,18 +99,18 @@ function game() {
     for (i = 0; i < ROUNDS; i++) {
         playerSelection = getPlayerChoice();
         computerSelection = getComputerChoice();
-        console.log(playRound(playerSelection, computerSelection));
+        result.innerText = (playRound(playerSelection, computerSelection));
     }
 
     switch (true) {
         case playerScore > computerScore:
-            console.log(`Player won! The score is ${playerScore}-${computerScore}`);
+            result.innerText = (`Player won! The score is ${playerScore}-${computerScore}`);
             break;
         case computerScore > playerScore:
-            console.log(`Computer won! The score is ${computerScore}-${playerScore}`);
+            result.innerText = (`Computer won! The score is ${computerScore}-${playerScore}`);
             break;
         case playerScore === computerScore:
-            console.log('It\'s a tie');
+            result.innerText = ('It\'s a tie');
             break;
     }
 }
